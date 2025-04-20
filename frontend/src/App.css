@@ -67,7 +67,7 @@ th {
 input {
   width: 100%;
   padding: 8px 12px;
-  border: 1px solid #697565;
+  border: 1px solid #a1a1a1;
   border-radius: 4px;
   font-size: 14px;
   background-color: #3C3D37;
@@ -81,7 +81,7 @@ input:focus {
 }
 
 input::placeholder {
-  color: #697565;
+  color: #919191;
 }
 
 .button-group {

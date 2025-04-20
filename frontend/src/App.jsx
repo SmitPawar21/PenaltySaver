@@ -9,14 +9,14 @@ function App() {
     { id: 4, dueDay: "", cost: "", penalty: "" },
     { id: 5, dueDay: "", cost: "", penalty: "" },
   ]);
-  
+
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const handleInputChange = (id, field, value) => {
     setJobs(
-      jobs.map(job => 
+      jobs.map(job =>
         job.id === id ? { ...job, [field]: value } : job
       )
     );
@@ -69,11 +69,11 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validJobs = validateJobs();
-    
+
     if (!validJobs) return;
-    
+
     setLoading(true);
-    
+
     try {
       // In a real app, replace with your actual API endpoint
       // const response = await fetch('https://your-api-endpoint.com/minimize-cash-flow', {
@@ -83,13 +83,13 @@ function App() {
       //   },
       //   body: JSON.stringify(validJobs),
       // });
-      
+
       // if (!response.ok) {
       //   throw new Error('Network response was not ok');
       // }
-      
+
       // const data = await response.json();
-      
+
       // Mock response for demo purposes
       setTimeout(() => {
         // This is a mock response - replace with actual API call in production
@@ -99,15 +99,15 @@ function App() {
             jobId: job.id
           })),
           lateJobs: validJobs.length > 3 ? [validJobs[validJobs.length - 1].id] : [],
-          totalCost: validJobs.reduce((sum, job) => sum + job.cost, 0) + 
-                    (validJobs.length > 3 ? validJobs[validJobs.length - 1].penalty : 0),
+          totalCost: validJobs.reduce((sum, job) => sum + job.cost, 0) +
+            (validJobs.length > 3 ? validJobs[validJobs.length - 1].penalty : 0),
           extraCost: validJobs.length > 3 ? validJobs[validJobs.length - 1].penalty : 0
         };
-        
+
         setResults(mockResponse);
         setLoading(false);
       }, 1000);
-      
+
     } catch (error) {
       setError('Failed to process the request. Please try again.');
       setLoading(false);
@@ -117,8 +117,9 @@ function App() {
   return (
     <div className="container">
       <header>
-        <h1>Cash Flow Minimization</h1>
+        <h1>Penalty Saver</h1>
         <p>Enter your payment obligations to optimize your payment schedule</p>
+        <h3 style={{marginTop:'30px'}}>Cash Flow Minimizer</h3>
       </header>
 
       <form onSubmit={handleSubmit}>
@@ -170,8 +171,8 @@ function App() {
                     />
                   </td>
                   <td>
-                    <button 
-                      type="button" 
+                    <button
+                      type="button"
                       className="remove-btn"
                       onClick={() => removeRow(job.id)}
                     >
@@ -183,7 +184,7 @@ function App() {
             </tbody>
           </table>
         </div>
-        
+
         <div className="button-group">
           <button type="button" onClick={addNewRow} className="add-btn">
             Add Row
@@ -192,14 +193,14 @@ function App() {
             {loading ? 'Processing...' : 'Calculate Optimal Payment Schedule'}
           </button>
         </div>
-        
+
         {error && <div className="error-message">{error}</div>}
       </form>
 
       {results && (
         <div className="results-section">
           <h2>Optimized Payment Schedule</h2>
-          
+
           <div className="timeline-view">
             <h3>Payment Schedule</h3>
             <div className="timeline">
@@ -211,7 +212,7 @@ function App() {
               ))}
             </div>
           </div>
-          
+
           <div className="late-jobs">
             <h3>Late Jobs</h3>
             {results.lateJobs.length > 0 ? (
@@ -224,7 +225,7 @@ function App() {
               <p>No late jobs!</p>
             )}
           </div>
-          
+
           <div className="cost-summary">
             <h3>Cost Summary</h3>
             <div className="cost-item">
